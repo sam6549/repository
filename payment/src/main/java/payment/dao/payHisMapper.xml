@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="payment.dao.PayHisMapper">
+    <insert id="insertPayHis" parameterType="payHisDto">
+        INSERT INTO payment_his VALUES (
+          #{refNo}
+        , #{bizStsCd}
+        , #{cardNo}
+        , #{istmNo}
+        , #{cardExpDt}
+        , #{cardCvc}
+        , #{trnAmt}
+        , #{vatAmt}
+        , #{orgRefNo}
+        , #{encCardInfo}
+        , #{trnfDat})
+    </insert>
+    
+    <update id="updatePayHis" parameterType="payHisDto">
+        UPDATE payment_his SET
+	          REF_NO = #{refNo}
+	        , BIZ_STS_CD = #{bizStsCd}
+	        , CARD_NO = #{cardNo}
+	        , ISTM_NO = #{istmNo} 
+	        , CARD_EXP_DT = #{cardExpDt}
+	        , CARD_CVC = #{cardCvc}
+	        , TRN_AMT = #{trnAmt}
+	        , VAT_AMT = #{vatAmt}
+	        , ORG_REF_NO = #{orgRefNo}
+	        , ENC_CARD_INFO = #{encCardInfo}
+	        , TRNF_DAT = #{trnfDat}
+        WHERE REF_NO = #{refNo}
+    </update>
+    
+    <delete id="cancelPayHis" parameterType="payHisDto">
+        UPDATE payment_his SET
+	          BIZ_STS_CD = #{bizStsCd}
+        WHERE REF_NO = #{refNo}
+    </delete>
+    
+    <select id="selectPayHis" parameterType="string" resultType="payHisDto">
+        SELECT REF_NO
+             , BIZ_STS_CD
+             , CARD_NO
+             , ISTM_NO
+             , CARD_EXP_DT
+             , CARD_CVC
+             , TRN_AMT
+             , VAT_AMT
+             , ORG_REF_NO
+             , ENC_CARD_INFO
+             , TRNF_DAT
+          FROM payment_his
+         WHERE REF_NO = #{refNo}
+    </select>
+    
+
+    
+    
+</mapper>

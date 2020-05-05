@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="payment.dao.PayBaseMapper">
+    <insert id="insertPayBase" parameterType="payBaseDto">
+        INSERT INTO payment_base VALUES (
+          #{refNo}
+        , #{bizStsCd}
+        , #{cardNo}
+        , #{istmNo}
+        , #{cardExpDt}
+        , #{cardCvc}
+        , #{trnAmt}
+        , #{vatAmt})
+    </insert>
+    
+    <update id="updatePayBase" parameterType="payBaseDto">
+        UPDATE payment_base SET
+	          REF_NO = #{refNo}
+	        , BIZ_STS_CD = #{bizStsCd}
+	        , CARD_NO = #{cardNo}
+	        , ISTM_NO = #{istmNo} 
+	        , CARD_EXP_DT = #{cardExpDt}
+	        , CARD_CVC = #{cardCvc}
+	        , TRN_AMT = #{trnAmt}
+	        , VAT_AMT = #{vatAmt}
+        WHERE REF_NO = #{refNo}
+    </update>
+    
+    <delete id="cancelPayBase" parameterType="payBaseDto">
+        UPDATE payment_base SET
+	          BIZ_STS_CD = #{bizStsCd}
+        WHERE REF_NO = #{refNo}
+    </delete>
+    
+    <select id="selectOnePayBase" parameterType="string" resultType="map">
+        SELECT * FROM payment_base WHERE REF_NO = #{refNo}
+         
+    </select>
+    
+    
+    
+</mapper>
